@@ -9,21 +9,23 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+
 // Conexión a MariaDB
 const connection = mysql.createConnection({
-  host: "54.83.19.232",            // IP pública de tu EC2
-  user: "adminuser",               // usuario de MariaDB
-  password: "NuevaPasswordSegura123!", // contraseña de MariaDB
-  database: "pymesdb"              // nombre de la base de datos
+    host: "127.0.0.1",            // conexión interna en la misma EC2
+    user: "adminuser",            // usuario de MariaDB
+    password: "NuevaPasswordSegura123!", // contraseña de MariaDB
+    database: "pymesdb"           // nombre de la base de datos
 });
 
 connection.connect(err => {
-  if (err) {
-    console.error("Error conectando a MariaDB:", err);
-    return;
-  }
-  console.log("Conexión a MariaDB establecida");
+    if (err) {
+        console.error("Error conectando a MariaDB:", err);
+        return;
+    }
+    console.log("Conexión a MariaDB establecida");
 });
+
 
 // Endpoint: Ventas
 app.get("/ventas", (req, res) => {
