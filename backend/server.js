@@ -1,11 +1,10 @@
-app.use(cors());
-app.use(express.json());
-
 //Conexion a la bdd 
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
 
+const app = express(); 
+const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
