@@ -1,5 +1,24 @@
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("./database.db");
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({
+  host: '54.83.19.232',
+  user: 'adminuser',
+  password: 'NuevaPasswordSegura123!',
+  database: 'pymesdb'
+});
+
+db.connect(err => {
+  if (err) {
+    console.error('Error al conectar a MariaDB:', err);
+    return;
+  }
+  console.log('Conexión exitosa a MariaDB en EC2');
+});
+
+
+//const sqlite3 = require("sqlite3").verbose();
+//const db = new sqlite3.Database("./database.db");
+// Proyecto personal: AWS Analytics Lite – Arquitectura modular en acción
 
 db.serialize(() => {
     // Tabla de ventas
