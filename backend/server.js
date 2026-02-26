@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
 const PORT = 3000;
@@ -8,8 +7,69 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Conexión a la base de datos
-const db = new sqlite3.Database("./database.db");
+//Conexion a la bdd 
+const express = require("express");
+const cors = require("cors");
+const mysql = require("mysql2");
+
+
+app.use(cors());
+app.use(express.json());
+
+// Conexión a MariaDB
+const connection = mysql.createConnection({
+  host: "54.83.19.232",            // IP pública de tu EC2
+  user: "adminuser",               // usuario de MariaDB
+  password: "NuevaPasswordSegura123!", // contraseña de MariaDB
+  database: "pymesdb"              // nombre de la base de datos
+});
+
+connection.connect(err => {
+  if (err) {
+    console.error("Error conectando a MariaDB:", err);
+    return;
+  }
+  console.log("Conexión a MariaDB establecida");
+});
+
+// Endpoint: Ventas
+app.get("/ventas", (req, res) => {
+  connection.query("SELECT * FROM ventas", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Endpoint: Productos
+app.get("/productos", (req, res) => {
+  connection.query("SELECT * FROM productos", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Endpoint: Inventario
+app.get("/inventario", (req, res) => {
+  connection.query("SELECT * FROM inventario", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Levantar servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
 
 // Endpoint: Ventas
 app.get("/ventas", (req, res) => {
