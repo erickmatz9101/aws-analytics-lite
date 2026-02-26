@@ -26,100 +26,47 @@ connection.connect(err => {
     console.log("Conexión a MariaDB establecida");
 });
 
-
-// Endpoint: Ventas
-app.get("/ventas", (req, res) => {
-  connection.query("SELECT * FROM ventas", (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+// Clientes
+app.get("/clientes", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM clientes");
     res.json(rows);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Endpoint: Productos
-app.get("/productos", (req, res) => {
-  connection.query("SELECT * FROM productos", (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+// Productos
+app.get("/productos", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM productos");
     res.json(rows);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Endpoint: Inventario
-app.get("/inventario", (req, res) => {
-  connection.query("SELECT * FROM inventario", (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+// Inventario
+app.get("/inventario", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM inventario");
     res.json(rows);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Levantar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-
-
-// Endpoint: Ventas
-app.get("/ventas", (req, res) => {
-  db.all("SELECT * FROM ventas", [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+// Finanzas
+app.get("/finanzas", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM finanzas");
     res.json(rows);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// Endpoint: Productos
-app.get("/productos", (req, res) => {
-  db.all("SELECT * FROM productos", [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json(rows);
-  });
-});
 
-// Endpoint: Inventario
-app.get("/inventario", (req, res) => {
-  db.all("SELECT * FROM inventario", [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json(rows);
-  });
-});
-
-// Endpoint: Clientes
-app.get("/clientes", (req, res) => {
-  db.all("SELECT * FROM clientes", [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json(rows);
-  });
-});
-
-// Endpoint: Finanzas
-app.get("/finanzas", (req, res) => {
-  db.all("SELECT * FROM finanzas", [], (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json(rows);
-  });
-});
 
 // Iniciar servidor
 app.listen(PORT, () => {
