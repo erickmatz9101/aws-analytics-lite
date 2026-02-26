@@ -18,54 +18,49 @@ const connection = mysql.createConnection({
     database: "pymesdb"           // nombre de la base de datos
 });
 
-connection.connect(err => {
-    if (err) {
-        console.error("Error conectando a MariaDB:", err);
-        return;
-    }
-    console.log("Conexión a MariaDB establecida");
-});
-
 // Clientes
-app.get("/clientes", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT * FROM clientes");
+app.get("/clientes", (req, res) => {
+  connection.query("SELECT * FROM clientes", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
     res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  });
 });
 
 // Productos
-app.get("/productos", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT * FROM productos");
+app.get("/productos", (req, res) => {
+  connection.query("SELECT * FROM productos", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
     res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  });
 });
 
 // Inventario
-app.get("/inventario", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT * FROM inventario");
+app.get("/inventario", (req, res) => {
+  connection.query("SELECT * FROM inventario", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
     res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  });
 });
 
 // Finanzas
-app.get("/finanzas", async (req, res) => {
-  try {
-    const [rows] = await db.query("SELECT * FROM finanzas");
+app.get("/finanzas", (req, res) => {
+  connection.query("SELECT * FROM finanzas", (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
     res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  });
 });
-
 
 
 // Iniciar servidor
