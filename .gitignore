@@ -1,0 +1,13 @@
+# Node.js
+node_modules/
+dist/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.exe
+*.zip
+*.tar.gz
+
+
