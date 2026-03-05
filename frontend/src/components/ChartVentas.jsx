@@ -25,7 +25,8 @@ export default function ChartVentas() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/ventas")
+    fetch("http://54.83.19.232:3000/ventas")
+
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error(err));
