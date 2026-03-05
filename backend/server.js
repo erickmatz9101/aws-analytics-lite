@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Conexión a MariaDB
 const connection = mysql.createConnection({
-    host: "::1", // conexión interna usando IPv6
+    host: "172.31.19.88", // conexión interna usando IPv6
     user: "adminuser",            // usuario de MariaDB
     password: "NuevaPasswordSegura123!", // contraseña de MariaDB
     database: "pymesdb"           // nombre de la base de datos
@@ -28,6 +28,19 @@ app.get("/clientes", (req, res) => {
     res.json(rows);
   });
 });
+
+// Ruta para obtener ventas
+app.get("/ventas", (req, res) => {
+    connection.query("SELECT * FROM ventas", (err, results) => {
+        if (err) {
+            console.error("Error en la consulta de ventas:", err);
+            res.status(500).send("Error en la base de datos");
+            return;
+        }
+        res.json(results);
+    });
+});
+
 
 // Productos
 app.get("/productos", (req, res) => {
