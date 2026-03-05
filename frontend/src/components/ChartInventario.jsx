@@ -16,7 +16,7 @@ export default function ChartInventario() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/inventario")
+fetch("http://54.83.19.232:3000/inventario")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error(err));

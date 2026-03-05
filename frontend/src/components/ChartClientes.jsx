@@ -17,7 +17,7 @@ export default function ChartClientes() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/clientes")
+    fetch("http://54.83.19.232:3000/clientes")//donnde se hace peticion a mi EC2 backend
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error(err));

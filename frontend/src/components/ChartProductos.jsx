@@ -16,7 +16,7 @@ export default function ChartProductos() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/productos")
+    fetch("http://54.83.19.232:3000/productos")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error(err));

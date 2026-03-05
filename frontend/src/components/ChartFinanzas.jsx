@@ -17,7 +17,7 @@ export default function ChartFinanzas() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/finanzas")
+    fetch("http://54.83.19.232:3000/finanzas")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error(err));
