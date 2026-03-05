@@ -12,10 +12,12 @@ app.use(express.json());
 
 // Conexión a MariaDB
 const connection = mysql.createConnection({
+
     host: "172.31.19.88", // IP privada de EC2
     user: "adminuser",
     password: "NuevaPasswordSegura123!",
     database: "pymesdb"
+
 });
 
 
